@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml">
+    
+    <h1>Controle de alunos</h1>
+    
+    <h:form>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+                
+        <p:commandButton value="Adicionar alunos" update="@form" action="#{pessoaBean.mudarParaInserir()}" ></p:commandButton>
+        <p:commandButton value="Remover alunos" update="@form" action="#{pessoaBean.mudarParaRemover()}" ></p:commandButton>
+        <p:commandButton value="Editar alunos" update="@form" action="#{pessoaBean.mudarParaEdita()}" ></p:commandButton>
+        <p:commandButton value="Buscar alunos" update="@form" action="#{pessoaBean.mudarParaBusca()}" ></p:commandButton>
+        <p:commandButton value="Listar alunos" update="@form" action="#{pessoaBean.mudarParaLista()}" ></p:commandButton>          
+        <br/>
+        <p:fieldset id="campo" >
+            <h:outputText value="Inserir Novo aluno" rendered="#{pessoaBean.inserir == true}"></h:outputText>
+            <p:panelGrid columns="2" rendered="#{pessoaBean.inserir == true}">
+                <h:outputLabel value="Nome"></h:outputLabel>
+                <p:inputText value="#{pessoaBean.entidade.nome}"></p:inputText>
+            </p:panelGrid>
+            <p:panelGrid columns="2" rendered="#{pessoaBean.remover == true}">
+                <h:outputLabel value="CPF"></h:outputLabel>
+                <p:inputText value="#{pessoaBean.entidade.cpf}"></p:inputText>
+                
+            </p:panelGrid>
+            
+        </p:fieldset>
+    </h:form>  
+    
+    
+</ui:decorate>

@@ -14,4 +14,9 @@ Servidor de execução: GlassFish 4.1 (padrão do NetBeans 8.0.2)
 
 SO: Xubuntu 18.04LTS
 
+Funcionamento H2 DATABASE:
+
+na sua pasta /home crie uma pasta com nome 'jdbc_h2'
+
+Coloque o arquivo banco.sql dentro desta pasta.
 

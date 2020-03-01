@@ -26,7 +26,7 @@
                 <h:outputLabel value="Nome"></h:outputLabel>
                 <p:inputText value="#{pessoaBean.entidade.nome}"></p:inputText>
                 <h:outputLabel value="CPF"></h:outputLabel>
-                <p:inputText value="#{pessoaBean.entidade.cpf}"></p:inputText>
+                <p:inputText value="#{pessoaBean.entidade.cpf}" disabled="#{pessoaBean.edita == true}"></p:inputText>
                 <h:outputLabel value="E-mail"></h:outputLabel>
                 <p:inputText value="#{pessoaBean.entidade.email}"></p:inputText>
                 <h:outputLabel value="Endreço"></h:outputLabel>

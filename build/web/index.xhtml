@@ -9,32 +9,62 @@
     <h1>Controle de alunos</h1>
     
     <h:form>
-        <!--<p:messages autoUpdate="true" showDetail="true"></p:messages>-->
-        
-        <p:toolbar>
-            <p:toolbarGroup>
-                <p:commandButton value="Adicionar alunos" update="@form" action="#{pessoaBean.mudarParaInserir()}" ></p:commandButton>
-                <p:commandButton value="Remover alunos" update="@form" action="#{pessoaBean.mudarParaRemover()}" ></p:commandButton>
-                <p:commandButton value="Editar alunos" update="@form" action="#{pessoaBean.mudarParaEdita()}" ></p:commandButton>
-                <p:commandButton value="Buscar alunos" update="@form" action="#{pessoaBean.mudarParaBusca()}" ></p:commandButton>
-                <p:commandButton value="Listar alunos" update="@form" action="#{pessoaBean.mudarParaLista()}" ></p:commandButton>
-            </p:toolbarGroup>
-        </p:toolbar>
-        <br/>
-        <p:fieldset legend="Gerenciar alunos">
-            <p:panelGrid columns="2" rendered="#{pessoaBean.inserir == true}">
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+                
+        <p:fieldset id="campo" >
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Adicionar alunos" action="#{pessoaBean.novo()}" update="@form" ></p:commandButton>
+                    <p:commandButton value="Salvar informações"  action="#{pessoaBean.salvar()}" disabled="#{pessoaBean.busca == true}" update="@form" ></p:commandButton>                    
+                    <p:commandButton value="Buscar alunos"  action="#{pessoaBean.buscar()}" update="@form" ></p:commandButton>
+                             
+                    <br/> 
+                </p:toolbarGroup>                
+            </p:toolbar>
+            
+            <p:panelGrid columns="2" rendered="#{pessoaBean.busca == false}">
                 <h:outputLabel value="Nome"></h:outputLabel>
                 <p:inputText value="#{pessoaBean.entidade.nome}"></p:inputText>
-            </p:panelGrid>
-            <p:panelGrid columns="2" rendered="#{pessoaBean.remover == true}">
                 <h:outputLabel value="CPF"></h:outputLabel>
-                <p:inputText value="#{pessoaBean.entidade.cpf}"></p:inputText>
+                <p:inputText value="#{pessoaBean.entidade.cpf}" disabled="#{pessoaBean.edita == true}"></p:inputText>
+                <h:outputLabel value="E-mail"></h:outputLabel>
+                <p:inputText value="#{pessoaBean.entidade.email}"></p:inputText>
+                <h:outputLabel value="Endreço"></h:outputLabel>
+                <p:inputText value="#{pessoaBean.entidade.endereco}"></p:inputText>
+                <h:outputLabel value="Telefone"></h:outputLabel>
+                <p:inputText value="#{pessoaBean.entidade.telefone}"></p:inputText>
+                <h:outputLabel value="Idade"></h:outputLabel>
+                <p:inputText  value="#{pessoaBean.entidade.idade}"></p:inputText>
+                
                 
             </p:panelGrid>
+            <p:dataTable value="#{pessoaBean.entidades}" var="pessoa" rendered="#{pessoaBean.busca == true}">
+                <p:column>
+                    <p:commandButton value="Editar" action="#{pessoaBean.editar(pessoa)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" action="#{pessoaBean.deletar(pessoa)}" update="@form"></p:commandButton>
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{pessoa.nome}">
+                    <h:outputText value="#{pessoa.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="CPF" sortBy="#{pessoa.cpf}">
+                    <h:outputText value="#{pessoa.cpf}"></h:outputText>
+                </p:column>
+                <p:column headerText="Endereço" sortBy="#{pessoa.endereco}">
+                    <h:outputText value="#{pessoa.endereco}"></h:outputText>
+                </p:column>
+                <p:column headerText="Telefone" sortBy="#{pessoa.telefone}">
+                    <h:outputText value="#{pessoa.telefone}"></h:outputText>
+                </p:column>
+                <p:column headerText="Idade" sortBy="#{pessoa.idade}">
+                    <h:outputText value="#{pessoa.idade}"></h:outputText>
+                </p:column>
+                <p:column headerText="E-mail" sortBy="#{pessoa.email}">
+                    <h:outputText value="#{pessoa.email}"></h:outputText>
+                </p:column>
+            </p:dataTable>
             
         </p:fieldset>
-    </h:form>
-    
+    </h:form>  
     
     
 </ui:decorate>
