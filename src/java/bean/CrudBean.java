@@ -1,8 +1,7 @@
 package bean;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -35,7 +34,7 @@ public abstract class CrudBean<E, D extends CrudDAO> {
     }
     public void deletar(E entidade){
         try {
-            getDao().remover(entidade);
+            getDao().deletar(entidade);
             entidades.remove(entidade);
             adicionarMensagem("Deletado com sucesso!", FacesMessage.SEVERITY_INFO);
         } catch (Exception ex) {

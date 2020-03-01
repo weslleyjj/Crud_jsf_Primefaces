@@ -4,18 +4,8 @@ public class Pessoa {
 	
 	private String nome, endereco, email;
 	private int cpf, telefone, idade; 
+        
 	
-	public Pessoa(String nome, String endereco, String email, int cpf, int telefone, int idade) {
-            this.nome = nome;
-            this.endereco = endereco;
-            this.email = email;
-            this.cpf = cpf;
-            this.telefone = telefone;
-            this.idade = idade;
-	}
-	public Pessoa() {
-		
-	}
 	public String getNome() {
 		return nome;
 	}
