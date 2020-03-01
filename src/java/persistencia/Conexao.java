@@ -3,6 +3,8 @@ package persistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 public class Conexao {
     private static final String USUARIO = "admin";
     private static final String SENHA = "admin";
-    private static final String CAMINHO = "jdbc:h2:~/jdbc/banco_pessoas;"; //INIT=runscript from '~/jdbc/banco.sql'";
+    private static final String CAMINHO = "jdbc:h2:~/jdbc_h2/banco_pessoas"; //INIT=runscript from '~/jdbc_h2/banco.sql'";
     private static final String DRIVER = "org.h2.Driver";
     private Connection conexao;
     
@@ -20,9 +22,11 @@ public class Conexao {
         try{
             Class.forName(DRIVER);
             conexao = DriverManager.getConnection(CAMINHO, USUARIO, SENHA);
-            //System.out.println("Conectou!");
+            
+            
         } catch ( ClassNotFoundException  | SQLException e) {
             System.err.println(e);
+            
         };
     }
     
@@ -38,5 +42,6 @@ public class Conexao {
     public Connection getConexao(){
         return conexao;
     }
+    
             
 }

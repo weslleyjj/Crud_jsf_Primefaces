@@ -25,7 +25,8 @@ public abstract class CrudBean<E, D extends CrudDAO> {
             adicionarMensagem("Cadastro com sucesso!", FacesMessage.SEVERITY_INFO);
             mudarParaBusca();
         } catch (Exception ex) {
-            System.err.println(ex);
+            adicionarMensagem(ex.toString(), FacesMessage.SEVERITY_ERROR);
+            adicionarMensagem("Não se pôde efetuar o cadastro!", FacesMessage.SEVERITY_ERROR);
         }
     }
     public void editar(E entidade){

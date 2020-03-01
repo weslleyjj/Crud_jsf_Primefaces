@@ -4,12 +4,14 @@ import entidades.Pessoa;
 
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import persistencia.Conexao;
 
 /**
@@ -28,14 +30,19 @@ public class PessoaDAO implements CrudDAO<Pessoa>{
     @Override
     public void salvar(Pessoa p) throws Exception{
         try {
-            Connection conexao = con.getConexao();
+            
             PreparedStatement ps;
+            
             if(buscaCpf(p.getCpf()) == false){
-                ps = conexao.prepareStatement(ADDPESSOA);
+                
+                con.conecta();
+                ps = con.getConexao().prepareStatement(ADDPESSOA); 
+                
                 
                 
             } else {
-                ps = conexao.prepareStatement(UPDATEPESSOA);
+                con.conecta();
+                ps = con.getConexao().prepareStatement(UPDATEPESSOA);
                 
             }
             ps.setString(1, p.getNome());
@@ -70,8 +77,8 @@ public class PessoaDAO implements CrudDAO<Pessoa>{
     @Override
     public List<Pessoa> buscar() throws Exception{
         try {
-            Connection conexao = con.getConexao();
-            PreparedStatement ps = conexao.prepareStatement(LISTPESSOA);
+            con.conecta();
+            PreparedStatement ps = con.getConexao().prepareStatement(LISTPESSOA);
             ResultSet rs = ps.executeQuery();
             List<Pessoa> pessoas = new ArrayList<>();
             while(rs.next()){
@@ -95,11 +102,12 @@ public class PessoaDAO implements CrudDAO<Pessoa>{
     }
     private boolean buscaCpf(int cpf) throws Exception{
         try{
-            Connection conexao = con.getConexao();
-            PreparedStatement ps = conexao.prepareStatement(LISTPESSOA);
+            con.conecta();
+            PreparedStatement ps = con.getConexao().prepareStatement(LISTPESSOA);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 if(rs.getInt("cpf") == cpf){
+                    con.desconecta();
                     return true;
                 }
             }
@@ -107,7 +115,8 @@ public class PessoaDAO implements CrudDAO<Pessoa>{
         }catch (SQLException ex){
             System.out.println(ex);
         }
-        
+        con.desconecta();
         return false;
     }
+    
 }
