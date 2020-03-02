@@ -10,8 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+
 import persistencia.Conexao;
 
 /**
@@ -48,7 +47,7 @@ public class PessoaDAO implements CrudDAO<Pessoa>{
             ps.setString(1, p.getNome());
             ps.setString(2, p.getEndereco());
             ps.setString(3, p.getEmail());
-            ps.setInt(4, p.getTelefone());
+            ps.setInt(4, p.getIdade());
             ps.setInt(5, p.getTelefone());
             ps.setInt(6, p.getCpf());          
             ps.execute();
